@@ -4,6 +4,7 @@ from dino_runner.utils.constants import RUNNING, JUMPING, DUCKING
 
 X_POS = 80
 Y_POS = 310
+Y_POS_DUCK = 340
 JUMP_VEL = 8.5
 
 class Dinosaur:
@@ -32,7 +33,7 @@ class Dinosaur:
         self.image = JUMPING
         
         if self.dino_jump:
-            self.dino_rect.y -= self.jump_vel*4
+            self.dino_rect.y -= self.jump_vel*4.5
             self.jump_vel -=0.8
         
         if self.jump_vel < -JUMP_VEL:
@@ -44,7 +45,7 @@ class Dinosaur:
         self.image = DUCKING[0] if self.step_index < 5 else DUCKING[1]
         self.dino_rect = self.image.get_rect()
         self.dino_rect.x = X_POS
-        self.dino_rect.y = Y_POS + 30
+        self.dino_rect.y = Y_POS_DUCK
         self.step_index+=1        
         
         if self.step_index >= 10:
@@ -58,8 +59,13 @@ class Dinosaur:
         elif not self.dino_jump:
             self.dino_run = True
 
-        if user_input[pygame.K_DOWN]:
+        if user_input[pygame.K_DOWN] and not self.dino_jump:
             self.dino_ducking = True
+            self.dino_run = False
+        
+        if user_input[pygame.K_DOWN] and self.dino_jump:
+            self.dino_ducking = True
+            self.jump_vel -=0.8
             self.dino_run = False
         
         if self.dino_run:
