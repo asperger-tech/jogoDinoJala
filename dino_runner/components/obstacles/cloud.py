@@ -4,4 +4,4 @@ class Cloud(CloudComportament):
     def __init__(self, images):
         super().__init__(images)
         
-        self.rect.y = 100
+        self.rect.y = 90
