@@ -7,13 +7,13 @@ class Bird(Obstacle):
     def __init__(self, images): #images[0,1]
         self.type = 0
         super().__init__(images, self.type)
-        self.rect.y = random.randint(140,220)
+        self.rect.y = random.randint(140,250)
         self.last_flap_time = 0
 
     def draw(self, screen):
         current_time = pygame.time.get_ticks()
 
-        if current_time - self.last_flap_time > 300:  # tempo em milissegundos para bater as asas
+        if current_time - self.last_flap_time > 200:  # tempo em milissegundos para bater as asas
             self.last_flap_time = current_time
             screen.blit(self.images[self.type], (self.rect.x, self.rect.y))
             self.type += 1
