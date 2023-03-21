@@ -62,6 +62,11 @@ BIRD = [
     pygame.image.load(os.path.join(IMG_DIR, "Bird/Bird2.png")),
 ]
 
+METEOR = [
+    pygame.image.load(os.path.join(IMG_DIR, "Other/0.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Other/1.png")),
+]
+
 
 
 CLOUD = pygame.image.load(os.path.join(IMG_DIR, 'Other/Cloud.png'))
