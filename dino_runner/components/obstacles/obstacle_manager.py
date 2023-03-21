@@ -3,12 +3,14 @@ import random
 from dino_runner.components.obstacles.cactus import Cactus, CactusLarge
 from dino_runner.components.obstacles.bird import Bird
 from dino_runner.components.obstacles.meteor import Meteor
+from dino_runner.components.obstacles.cloud import *
 from dino_runner.utils.constants import * 
 
 
 class ObstacleManager:
     def __init__(self):
         self.obstacles = []
+        self.clouds = []
 
     def update(self, game):
 
@@ -23,6 +25,9 @@ class ObstacleManager:
                 self.obstacles.append(Bird(BIRD))
             elif random_obstacle == 3:
                 self.obstacles.append(Meteor(METEOR))
+        
+        if len(self.clouds) == 0:
+            self.clouds.append(Cloud(CLOUD))
 
 
         for obstacle in self.obstacles:
@@ -32,10 +37,16 @@ class ObstacleManager:
                 game.playing = False
                 game.death_count += 1
                 break
+
+        for cloud in self.clouds:
+            cloud.update(game.game_speed, self.clouds)
     
     def draw(self, screen):
         for obstacle in self.obstacles:
             obstacle.draw(screen)
+        
+        for cloud in self.clouds:
+            cloud.draw(screen)
 
     def reset_obstacles(self):
         self.obstacles.clear()
