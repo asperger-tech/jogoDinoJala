@@ -8,6 +8,8 @@ from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 class Game:
     def __init__(self):
         pygame.init()
+        SOUNDTRACK = pygame.mixer.music.load('dino_runner/assets/Other/soundtrack.mp3')
+        pygame.mixer.music.play(-1)
         pygame.display.set_caption(TITLE)
         pygame.display.set_icon(ICON)
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -25,6 +27,7 @@ class Game:
         self.lose_font = pygame.font.Font(None, 70)
         self.score = 0
 
+    
 
     def execute(self):
         self.executing = True
@@ -182,3 +185,5 @@ class Game:
                 elif pygame.key.get_pressed()[pygame.K_r]:
                     self.death_count = 0
                     self.run()
+
+   
