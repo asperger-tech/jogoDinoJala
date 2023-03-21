@@ -115,28 +115,25 @@ class Game:
     
     def draw_lose(self):
         # Renderizar a pontuação na fonte
-        lose_text = self.lose_font.render('GAME OVER!', True, (0, 0, 0))
+        lose_text = pygame.image.load(os.path.join(IMG_DIR, 'Other/GameOver.png'))
 
         # Desenhar a pontuação na tela
-        half_width = SCREEN_WIDTH // 2
-
-        self.screen.blit(lose_text, (SCREEN_WIDTH - lose_text.get_width() - 400, 200))
+        self.screen.blit(lose_text, (SCREEN_WIDTH - lose_text.get_width() - 290, 180))
     
     def draw_level(self):
+        font = pygame.font.Font(FONT_STYLE, 25)
+
         if self.score < 400:
-            font = pygame.font.Font(FONT_STYLE, 25)
             text = font.render("EASY MODE", True, (0,128,0))
             text_rect = text.get_rect()
             text_rect.center = (140, 50)
             self.screen.blit(text, text_rect)
         elif self.score < 1000:
-            font = pygame.font.Font(FONT_STYLE, 25)
             text = font.render("MEDIUM MODE", True, (238, 173, 45))
             text_rect = text.get_rect()
             text_rect.center = (140, 50)
             self.screen.blit(text, text_rect)
         else:
-            font = pygame.font.Font(FONT_STYLE, 25)
             text = font.render("HARD MODE", True, (255, 0, 0))
             text_rect = text.get_rect()
             text_rect.center = (140, 50)
@@ -144,39 +141,34 @@ class Game:
 
     def show_menu(self):
         self.screen.fill((255,255,255))
-
         half_screen_height = SCREEN_HEIGHT // 2
         half_screen_width = SCREEN_WIDTH // 2
+        font = pygame.font.Font(FONT_STYLE, 25)
 
         if self.death_count == 0:
-            font = pygame.font.Font(FONT_STYLE, 25)
             text = font.render("Press (s) to start playing.", True, (0,0,0))
             text_rect = text.get_rect()
             text_rect.center = (half_screen_width, half_screen_height)
             self.screen.blit(text, text_rect)
         else:
-            font = pygame.font.Font(FONT_STYLE, 25)
             self.draw_lose()
             text = font.render("Press (c) to continue playing.", True, (0,0,0))
             text_rect = text.get_rect()
             text_rect.center = (half_screen_width, half_screen_height)
             self.screen.blit(text, text_rect)
 
-            font = pygame.font.Font(FONT_STYLE, 25)
             text2 = font.render("Press (r) to restart game.", True, (0,0,0))
-            text_rect = text.get_rect()
             text_rect.center = (half_screen_width + 30, half_screen_height + 50)
             self.screen.blit(text2, text_rect)
 
             font = pygame.font.Font(FONT_STYLE, 30)
             text3 = font.render(f"Your Score: {self.score}", True, (0,0,0))
-            text_rect = text.get_rect()
             text_rect.center = (half_screen_width + 60, half_screen_height + 140)
             self.screen.blit(text3, text_rect)
         
         pygame.display.update()
         self.handle_events_on_menu()
-
+    
     def handle_events_on_menu(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
