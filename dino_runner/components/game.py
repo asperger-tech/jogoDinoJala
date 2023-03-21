@@ -163,11 +163,16 @@ class Game:
             self.screen.blit(text, text_rect)
 
             font = pygame.font.Font(FONT_STYLE, 25)
-            self.draw_lose()
             text2 = font.render("Press (r) to restart game.", True, (0,0,0))
             text_rect = text.get_rect()
             text_rect.center = (half_screen_width + 30, half_screen_height + 50)
             self.screen.blit(text2, text_rect)
+
+            font = pygame.font.Font(FONT_STYLE, 30)
+            text3 = font.render(f"Your Score: {self.score}", True, (0,0,0))
+            text_rect = text.get_rect()
+            text_rect.center = (half_screen_width + 60, half_screen_height + 140)
+            self.screen.blit(text3, text_rect)
         
         pygame.display.update()
         self.handle_events_on_menu()
