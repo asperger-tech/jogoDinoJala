@@ -1,0 +1,18 @@
+1 - som incrementado (game.py, 11)
+
+2 - refactoring do codigo
+
+3 - game over trocado para imagem(game.py, 118)
+
+4 - mais opções para o jogo apos morrer no menu(game.py, 142,172,40)
+	-reset
+	-continuar
+	-score final
+
+5 - placar de mortes para continuar após morrer( game.py, 109,76)
+
+6 - indicador de dificuldade na tela (game.py, 123, 76)
+
+7 - nuvem (obstacle/)
+
+8 - novo obstaculo aereo incrementado(meteor)
