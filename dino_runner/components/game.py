@@ -116,10 +116,10 @@ class Game:
         self.screen.blit(text, text_rect)
 
     def draw_score(self):
-        self.method_draw_score_deaths(f"Score: {self.score}",1000,50,(0,0,0))
+        self.method_draw_score_deaths(f"Score: {self.score}",1000,50,(255,127,80))
 
     def draw_deaths(self):
-        self.method_draw_score_deaths(f"Deaths: {self.death_count}",550,50,(0,0,0))
+        self.method_draw_score_deaths(f"Deaths: {self.death_count}",550,50,(178,34,34))
 
     def draw_lose(self):
         self.screen.blit(LOSE_TEXT, (SCREEN_WIDTH - LOSE_TEXT.get_width() - 290, 180))
