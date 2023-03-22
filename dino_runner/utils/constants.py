@@ -1,7 +1,6 @@
 import pygame
 import os
 
-# Global Constants
 TITLE = "Dino Runner"
 SCREEN_HEIGHT = 600
 SCREEN_WIDTH = 1100
@@ -9,8 +8,10 @@ FPS = 30
 IMG_DIR = os.path.join(os.path.dirname(__file__), "..", "assets")
 FONT_STYLE = "freesansbold.ttf"
 
+DEFAULT_TYPE = "default"
+SHIELD_TYPE = "shield"
+HAMMER_TYPE = "hammer"
 
-# Assets Constants
 ICON = pygame.image.load(os.path.join(IMG_DIR, "DinoWallpaper.png"))
 
 RUNNING = [
@@ -57,6 +58,9 @@ LARGE_CACTUS = [
     pygame.image.load(os.path.join(IMG_DIR, "Cactus/LargeCactus2.png")),
     pygame.image.load(os.path.join(IMG_DIR, "Cactus/LargeCactus3.png")),
 ]
+SLIME = [
+        pygame.image.load(os.path.join(IMG_DIR, "Other/slime.png")),
+]
 
 BIRD = [
     pygame.image.load(os.path.join(IMG_DIR, "Bird/Bird1.png")),
@@ -67,6 +71,12 @@ METEOR = [
     pygame.image.load(os.path.join(IMG_DIR, "Other/0.png")),
     pygame.image.load(os.path.join(IMG_DIR, "Other/1.png")),
 ]
+
+LOGODINORUN = pygame.image.load(os.path.join(IMG_DIR, 'Other/logo.png'))
+half_screen_height = SCREEN_HEIGHT // 2
+half_screen_width = SCREEN_WIDTH // 2
+LOSE_TEXT = pygame.image.load(os.path.join(IMG_DIR, 'Other/GameOver.png'))
+
 
 
 
