@@ -8,8 +8,6 @@ from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 class Game:
     def __init__(self):
         pygame.init()
-        SOUNDTRACK = pygame.mixer.music.load('dino_runner/assets/Other/soundtrack.mp3')
-        pygame.mixer.music.play(-1)
         pygame.display.set_caption(TITLE)
         pygame.display.set_icon(ICON)
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -26,8 +24,7 @@ class Game:
         self.score_font = pygame.font.Font(None, 40)
         self.lose_font = pygame.font.Font(None, 70)
         self.score = 0
-
-    
+        self.font = pygame.font.Font(FONT_STYLE, 25)
 
     def execute(self):
         self.executing = True
@@ -38,6 +35,8 @@ class Game:
         pygame.quit()
 
     def run(self):
+        SOUNDTRACK = pygame.mixer.music.load('dino_runner/assets/Sounds/soundtrack.mp3')
+        pygame.mixer.music.play(-1)
         # Game loop: events - update - draw
         self.playing = True
         if self.death_count == 0:
@@ -100,70 +99,63 @@ class Game:
         self.x_pos_bg -= self.game_speed
 
     def draw_score(self):
-        font = pygame.font.Font(FONT_STYLE, 25)
-        text = font.render(f"Score: {self.score}", True, (0,0,0))
-        text_rect = text.get_rect()
-        text_rect.center = (1000, 50)
-        self.screen.blit(text, text_rect)
+        self.draw_score_deaths(f"Score: {self.score}",1000,50)
 
     def draw_deaths(self):
-        font = pygame.font.Font(FONT_STYLE, 25)
-        text = font.render(f"Deaths: {self.death_count}", True, (0,0,0))
+        self.draw_score_deaths(f"Deaths: {self.death_count}",550,50)
+
+    def draw_score_deaths(self,texto,x,y):
+        text = self.font.render(texto, True, (0,0,0))
         text_rect = text.get_rect()
-        text_rect.center = (550, 50)
+        text_rect.center = (x, y)
         self.screen.blit(text, text_rect)
     
     def draw_lose(self):
-        # Renderizar a pontuação na fonte
         lose_text = pygame.image.load(os.path.join(IMG_DIR, 'Other/GameOver.png'))
-
-        # Desenhar a pontuação na tela
         self.screen.blit(lose_text, (SCREEN_WIDTH - lose_text.get_width() - 290, 180))
     
+    def draw_screen_level(self,texto,rgb):
+        text = self.font.render(texto, True, (rgb))
+        text_rect = text.get_rect()
+        text_rect.center = (140, 50)
+        self.screen.blit(text, text_rect)
+
     def draw_level(self):
-        font = pygame.font.Font(FONT_STYLE, 25)
 
         if self.score < 400:
-            text = font.render("EASY MODE", True, (0,128,0))
-            text_rect = text.get_rect()
-            text_rect.center = (140, 50)
-            self.screen.blit(text, text_rect)
+            self.draw_screen_level("EASY MODE",(0,128,0))
         elif self.score < 1000:
-            text = font.render("MEDIUM MODE", True, (238, 173, 45))
-            text_rect = text.get_rect()
-            text_rect.center = (140, 50)
-            self.screen.blit(text, text_rect)
+            self.draw_screen_level("MEDIUM MODE",(238, 173, 45))
         else:
-            text = font.render("HARD MODE", True, (255, 0, 0))
-            text_rect = text.get_rect()
-            text_rect.center = (140, 50)
-            self.screen.blit(text, text_rect)
+            self.draw_screen_level("HARD MODE",(255, 0, 0))
 
     def show_menu(self):
         self.screen.fill((255,255,255))
         half_screen_height = SCREEN_HEIGHT // 2
         half_screen_width = SCREEN_WIDTH // 2
-        font = pygame.font.Font(FONT_STYLE, 25)
 
         if self.death_count == 0:
-            text = font.render("Press (s) to start playing.", True, (0,0,0))
+
+            lose_text = pygame.image.load(os.path.join(IMG_DIR, 'Other/logo.png'))
+            self.screen.blit(lose_text, (SCREEN_WIDTH - lose_text.get_width() - 290, 180))
+
+            text = self.font.render("Press (s) to start playing.", True, (0,0,0))
             text_rect = text.get_rect()
-            text_rect.center = (half_screen_width, half_screen_height)
+            text_rect.center = (half_screen_width, half_screen_height + 130)
             self.screen.blit(text, text_rect)
         else:
             self.draw_lose()
-            text = font.render("Press (c) to continue playing.", True, (0,0,0))
+            text = self.font.render("Press (c) to continue playing.", True, (0,0,0))
             text_rect = text.get_rect()
             text_rect.center = (half_screen_width, half_screen_height)
             self.screen.blit(text, text_rect)
 
-            text2 = font.render("Press (r) to restart game.", True, (0,0,0))
+            text2 = self.font.render("Press (r) to restart game.", True, (0,0,0))
             text_rect.center = (half_screen_width + 30, half_screen_height + 50)
             self.screen.blit(text2, text_rect)
 
-            font = pygame.font.Font(FONT_STYLE, 30)
-            text3 = font.render(f"Your Score: {self.score}", True, (0,0,0))
-            text_rect.center = (half_screen_width + 60, half_screen_height + 140)
+            text3 = self.font.render(f"Your Score: {self.score}", True, (0,0,0))
+            text_rect.center = (half_screen_width + 80, half_screen_height + 140)
             self.screen.blit(text3, text_rect)
         
         pygame.display.update()
