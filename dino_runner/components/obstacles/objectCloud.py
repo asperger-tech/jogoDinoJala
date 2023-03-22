@@ -2,7 +2,7 @@ from dino_runner.utils.constants import SCREEN_WIDTH
 
 
 class CloudComportament:
-    def __init__(self, image): #O modulo cactus.py traz para seu "pai" as imagens, num aleatorio, POS_Y
+    def __init__(self, image):
         self.image = image
         self.rect = self.image.get_rect()
         self.rect.x = SCREEN_WIDTH
