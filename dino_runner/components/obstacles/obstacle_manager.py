@@ -35,6 +35,8 @@ class ObstacleManager:
             if game.player.dino_rect.colliderect(obstacle.rect):
                 pygame.time.delay(500)
                 game.playing = False
+                DEATHSOUND = pygame.mixer.music.load('dino_runner/assets/Sounds/death.wav')
+                pygame.mixer.music.play()
                 game.death_count += 1
                 break
 
