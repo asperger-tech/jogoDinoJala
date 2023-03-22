@@ -66,11 +66,20 @@ BIRD = [
     pygame.image.load(os.path.join(IMG_DIR, "Bird/Bird1.png")),
     pygame.image.load(os.path.join(IMG_DIR, "Bird/Bird2.png")),
 ]
+BIRD_BLUE = [
+    pygame.image.load(os.path.join(IMG_DIR, "Bird/Bird1blue.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Bird/Bird2blue.png")),
+]
+BIRD_GREEN = [
+    pygame.image.load(os.path.join(IMG_DIR, "Bird/Bird1green.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Bird/Bird2green.png")),
+]
 
 METEOR = [
     pygame.image.load(os.path.join(IMG_DIR, "Other/0.png")),
     pygame.image.load(os.path.join(IMG_DIR, "Other/1.png")),
 ]
+BIRD_LIST = [BIRD,BIRD_BLUE,BIRD_GREEN]
 
 LOGODINORUN = pygame.image.load(os.path.join(IMG_DIR, 'Other/logo.png'))
 half_screen_height = SCREEN_HEIGHT // 2
