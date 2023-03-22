@@ -1,18 +1,8 @@
-1 - som incrementado (game.py, 11)
+1- refatoração criando funções(game.py, 101, 118,165)
 
-2 - refactoring do codigo
+2 - bird agora dá investidas durante voo.
 
-3 - game over trocado para imagem(game.py, 118)
-
-4 - mais opções para o jogo apos morrer no menu(game.py, 142,172,40)
-	-reset
-	-continuar
-	-score final
-
-5 - placar de mortes para continuar após morrer( game.py, 109,76)
-
-6 - indicador de dificuldade na tela (game.py, 123, 76)
-
-7 - nuvem (obstacle/)
-
-8 - novo obstaculo aereo incrementado(meteor)
+3- Adicionar diferentes tipos de obstacles(slime)
+4- Adicionar som no jogo( morte)
+5- monocromia retirada no jogo.
+6- comentarios removidos.
