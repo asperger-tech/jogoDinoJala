@@ -6,7 +6,7 @@ class Meteor(Obstacle):
     def __init__(self, images): 
         self.type = 0
         super().__init__(images, self.type)
-        self.rect.y = random.randint(140,230)
+        self.rect.y = random.randint(250,350)
         self.explosion = 0
 
     def draw(self, screen):
