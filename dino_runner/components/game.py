@@ -1,8 +1,8 @@
 import pygame
 import time
 from dino_runner.utils.constants import *
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, FONT_STYLE
-from dino_runner.components.dinosaur import Dinosaur
+from dino_runner.utils.constants import BG,ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, FONT_STYLE
+from dino_runner.components.dinosaur import *
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 from dino_runner.components.power_ups.power_up_manager import PowerUpManager
 from dino_runner.components.power_ups.power_up import *
@@ -27,8 +27,6 @@ class Game:
         self.font = pygame.font.Font(FONT_STYLE, 25)
         self.obstacle_manager = ObstacleManager()
         self.power_up_manager = PowerUpManager()
-        # SOUNDTRACK = pygame.mixer.music.load('dino_runner/assets/Sounds/soundtrack.mp3')
-        # pygame.mixer.music.play(-1)
 
     def execute(self):
         self.executing = True
@@ -39,8 +37,7 @@ class Game:
         pygame.quit()
 
     def run(self):
-        SOUNDTRACK = pygame.mixer.music.load('dino_runner/assets/Sounds/soundtrack.mp3')
-        pygame.mixer.music.play(-1)
+        SOUNDTRACK.play(-1)
         self.playing = True
         if self.death_count == 0:
             self.reset_game()
@@ -50,6 +47,8 @@ class Game:
             self.events()
             self.update()
             self.draw()
+        SOUNDTRACK.stop()
+
 
     def reset_game(self):
         self.obstacle_manager.reset_obstacles()
@@ -79,13 +78,12 @@ class Game:
     def draw(self):
         self.clock.tick(FPS)
         self.screen.fill((255, 255, 255))
-        self.draw_background()
 
+        self.draw_background()
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
         self.power_up_manager.draw(self.screen)
         self.draw_power_up_time()
-
         self.draw_score()
         self.draw_level()
         self.draw_deaths()
@@ -120,17 +118,16 @@ class Game:
         self.screen.blit(text, text_rect)
 
     def draw_score(self):
-        self.method_draw_score_deaths(f"Score: {self.score}",1000,50,(255,127,80))
+        self.method_draw_score_deaths(f"Score: {self.score}",1000,50,(0,0,0))
 
     def draw_deaths(self):
         self.method_draw_score_deaths(f"Deaths: {self.death_count}",550,50,(178,34,34))
 
     def draw_lose(self):
-        self.screen.blit(LOSE_TEXT, (SCREEN_WIDTH - LOSE_TEXT.get_width() - 290, 180))
+        self.screen.blit(LOSE_TEXT, (SCREEN_WIDTH - LOSE_TEXT.get_width() - 290, 170))
     
     def draw_lifes(self):
-        self.method_draw_score_deaths(f"Lifes: {self.lifes}",1000,100,(178,34,34))
-
+        self.method_draw_score_deaths(f"Lifes: {self.lifes}",1000,100,(0,0,0))
     
     def draw_screen_level(self,texto,rgb):
         text = self.font.render(texto, True, (rgb))
@@ -154,19 +151,19 @@ class Game:
         self.screen.blit(text, text_rect)
 
     def show_menu(self):
-        self.screen.fill((255,255,255))
         
         if self.death_count == 0:
+            self.screen.blit(BG_MENU, (self.x_pos_bg, self.y_pos_bg))
 
             self.screen.blit(LOGODINORUN, (SCREEN_WIDTH - LOGODINORUN.get_width() - 290, 180))
-            self.menu_message("Press (s) to start playing.",(0,0,0),0,130)
+            self.menu_message("Press (s) to start playing.",(0,0,0),0,140)
         else:
             self.draw_lose()
-            self.menu_message("Press (c) to continue playing.",(143,188,143),0,0)
+            self.menu_message("Press (c) to continue playing.",(255,255,255),0,60)
 
-            self.menu_message("Press (r) to restart game.",(244,164,96),0,50)
+            self.menu_message("Press (r) to restart game.",(255,255,255),0,100)
 
-            self.menu_message(f"Your Score: {self.score}",(255,215,0),0,120)
+            self.menu_message(f"Your Score: {self.score}",(255,255,255),0,150)
         
         pygame.display.update()
         self.handle_events_on_menu()
