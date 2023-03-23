@@ -1,1 +1,8 @@
-1 - vida extra adicionada
+1- o jogo dinossauro agora tem 3 vidas, podendo pegar powerups de vidas
+    durante o jogo e ir acumulando.
+
+2- quase todos sprites do jogo mudados, tornando jogo vizualmente mais bonito.
+
+3- Coin adicionado, caso pego soma 100 pontos adicionais
+
+4- 9 de 10 cumpridos, faltou selecionar dificuldade
