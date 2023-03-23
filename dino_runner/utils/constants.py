@@ -14,6 +14,8 @@ HAMMER_TYPE = "hammer"
 
 ICON = pygame.image.load(os.path.join(IMG_DIR, "DinoWallpaper.png"))
 
+SOUNDTRACK = 'dino_runner/assets/Sounds/soundtrack.mp3'
+
 RUNNING = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun1.png")),
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun2.png")),
@@ -58,6 +60,13 @@ LARGE_CACTUS = [
     pygame.image.load(os.path.join(IMG_DIR, "Cactus/LargeCactus2.png")),
     pygame.image.load(os.path.join(IMG_DIR, "Cactus/LargeCactus3.png")),
 ]
+SKELETON = [
+    pygame.image.load(os.path.join(IMG_DIR, "Cactus/esqueleto.png"))
+]
+MINOTAUR = [
+    pygame.image.load(os.path.join(IMG_DIR, "Cactus/0.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Cactus/1.png"))
+]
 SLIME = [
         pygame.image.load(os.path.join(IMG_DIR, "Other/slime.png")),
 ]
@@ -74,6 +83,10 @@ BIRD_GREEN = [
     pygame.image.load(os.path.join(IMG_DIR, "Bird/Bird1green.png")),
     pygame.image.load(os.path.join(IMG_DIR, "Bird/Bird2green.png")),
 ]
+GHOST = [
+    pygame.image.load(os.path.join(IMG_DIR, "Bird/ghost2.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Bird/ghost.png"))
+    ]
 
 METEOR = [
     pygame.image.load(os.path.join(IMG_DIR, "Other/0.png")),
@@ -93,8 +106,8 @@ CLOUD = pygame.image.load(os.path.join(IMG_DIR, 'Other/Cloud.png'))
 SHIELD = pygame.image.load(os.path.join(IMG_DIR, 'Other/shield.png'))
 HAMMER = pygame.image.load(os.path.join(IMG_DIR, 'Other/hammer.png'))
 
-BG = pygame.image.load(os.path.join(IMG_DIR, 'Other/Track.png'))
+BG = pygame.image.load(os.path.join(IMG_DIR, 'Other/teste3.jpg'))
 
-HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/SmallHeart.png'))
+HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/heart.png'))
 
 DEFAULT_TYPE = "default"
