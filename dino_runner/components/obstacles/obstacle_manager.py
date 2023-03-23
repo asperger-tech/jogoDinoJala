@@ -3,15 +3,18 @@ import random
 from dino_runner.components.obstacles.cactus import Cactus
 from dino_runner.components.obstacles.bird import Bird
 from dino_runner.components.obstacles.meteor import Meteor
+from dino_runner.components.obstacles.minotaur import Minotaur
 from dino_runner.components.obstacles.slime import Slime
 from dino_runner.components.obstacles.cloud import *
 from dino_runner.utils.constants import * 
+
 
 
 class ObstacleManager:
     def __init__(self):
         self.obstacles = []
         self.clouds = []
+        
 
     def update(self, game):
 
@@ -20,19 +23,19 @@ class ObstacleManager:
             random_bird = random.randint(0, 2)
 
             if random_obstacle == 0:            
-                self.obstacles.append(Cactus(SMALL_CACTUS,320))
+                self.obstacles.append(Minotaur(MINOTAUR))
                 self.item = 1
             elif random_obstacle == 1:
-                self.obstacles.append(Cactus(LARGE_CACTUS,300))
+                self.obstacles.append(Cactus(LARGE_CACTUS,400))
                 self.item = 1
             elif random_obstacle == 2:
-                self.obstacles.append(Bird(BIRD_LIST[random_bird]))
+                self.obstacles.append(Bird(GHOST))
                 self.item = 2
             elif random_obstacle == 3:
                 self.obstacles.append(Meteor(METEOR))
                 self.item = 2
             elif random_obstacle == 4:
-                self.obstacles.append(Slime(SLIME))
+                self.obstacles.append(Slime(SKELETON))
                 self.item = 1
         
         if len(self.clouds) == 0:
@@ -45,23 +48,29 @@ class ObstacleManager:
             if game.player.dino_rect.colliderect(obstacle.rect):
                 if not game.player.has_power_up:
                     pygame.time.delay(500)
-                    game.playing = False
-                    DEATHSOUND = pygame.mixer.music.load('dino_runner/assets/Sounds/death.wav')
-                    pygame.mixer.music.play()
-                    game.death_count += 1
-                    break
+                    game.lifes -=1
+                    self.reset_obstacles()
+                    if game.lifes == 0:
+                        game.playing = False
+                        DEATHSOUND = pygame.mixer.music.load('dino_runner/assets/Sounds/death.wav')
+                        pygame.mixer.music.play()
+                        game.death_count += 1
+                        break
                 elif game.player.has_power_up:
                     if game.player.type == HAMMER_TYPE and self.item == 1: 
                         self.obstacles.remove(obstacle)
                     elif game.player.type == SHIELD_TYPE:
                         self.obstacles.remove(obstacle)
-                    else:
-                        game.player.type = DEFAULT_TYPE
-                        pygame.mixer.music.play()
+                    elif game.player.type == HAMMER_TYPE and self.item == 2:
                         pygame.time.delay(500)
-                        game.playing = False
-                        game.death_count+=1
-                        break
+                        game.lifes -=1
+                        self.reset_obstacles()
+                        if game.lifes == 0:
+                            game.playing = False
+                            DEATHSOUND = pygame.mixer.music.load('dino_runner/assets/Sounds/death.wav')
+                            pygame.mixer.music.play()
+                            game.death_count += 1
+                            break
 
         for cloud in self.clouds:
             cloud.update(game.game_speed, self.clouds)
