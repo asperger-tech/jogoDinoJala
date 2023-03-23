@@ -19,13 +19,16 @@ class Game:
         self.playing = False
         self.executing = False
         self.game_speed = 20
+        self.lifes = 3
         self.x_pos_bg = 0
-        self.y_pos_bg = 380
+        self.y_pos_bg = 0
         self.death_count = 0
         self.score = 0
         self.font = pygame.font.Font(FONT_STYLE, 25)
         self.obstacle_manager = ObstacleManager()
         self.power_up_manager = PowerUpManager()
+        # SOUNDTRACK = pygame.mixer.music.load('dino_runner/assets/Sounds/soundtrack.mp3')
+        # pygame.mixer.music.play(-1)
 
     def execute(self):
         self.executing = True
@@ -86,6 +89,7 @@ class Game:
         self.draw_score()
         self.draw_level()
         self.draw_deaths()
+        self.draw_lifes()
 
         pygame.display.flip()
 
@@ -124,6 +128,10 @@ class Game:
     def draw_lose(self):
         self.screen.blit(LOSE_TEXT, (SCREEN_WIDTH - LOSE_TEXT.get_width() - 290, 180))
     
+    def draw_lifes(self):
+        self.method_draw_score_deaths(f"Lifes: {self.lifes}",1000,100,(178,34,34))
+
+    
     def draw_screen_level(self,texto,rgb):
         text = self.font.render(texto, True, (rgb))
         text_rect = text.get_rect()
@@ -151,7 +159,7 @@ class Game:
         if self.death_count == 0:
 
             self.screen.blit(LOGODINORUN, (SCREEN_WIDTH - LOGODINORUN.get_width() - 290, 180))
-            self.menu_message("Press (s) to start playing.",(0,0,205),0,130)
+            self.menu_message("Press (s) to start playing.",(0,0,0),0,130)
         else:
             self.draw_lose()
             self.menu_message("Press (c) to continue playing.",(143,188,143),0,0)
@@ -172,9 +180,11 @@ class Game:
                 if pygame.key.get_pressed()[pygame.K_s] and self.death_count == 0:
                     self.run()
                 elif pygame.key.get_pressed()[pygame.K_c]:
+                    self.lifes = 1
                     self.run()
                 elif pygame.key.get_pressed()[pygame.K_r]:
                     self.death_count = 0
+                    self.lifes = 3
                     self.run()
 
    
