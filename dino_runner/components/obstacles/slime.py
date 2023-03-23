@@ -7,4 +7,4 @@ class Slime(Obstacle):
         self.type = 0
         super().__init__(images, self.type)
         
-        self.rect.y = 290
+        self.rect.y = 400
