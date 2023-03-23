@@ -1,13 +1,1 @@
-1- refatoração criando funções(game.py, 101, 118,165, classe cactus)
-
-2 - bird agora dá investidas durante voo.
-
-3- Adicionar diferentes tipos de obstacles(slime)
-
-4- Adicionar som no jogo( morte)
-
-5- monocromia retirada no jogo.
-
-6- comentarios removidos.
-
-7- martelo adicionado para quebrar obstaculos terrestres.
+1 - vida extra adicionada
