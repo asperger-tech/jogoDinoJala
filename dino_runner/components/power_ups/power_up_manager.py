@@ -3,17 +3,16 @@ import pygame
 from dino_runner.components.power_ups.shield import Shield
 from dino_runner.components.power_ups.hammer import Hammer
 from dino_runner.components.power_ups.extra_life import Heart
+from dino_runner.components.power_ups.coin import Coin
 from dino_runner.components.game import *
-
-
 
 
 class PowerUpManager:
     def __init__(self):
         self.power_ups = []
         self.extra_life = []
-        self.when_appears = 0
-        self.heart_appears = 100
+        self.when_appears = 100
+        self.heart_appears = 200
     
     def generate_power_up(self, score):
         if len(self.power_ups) == 0 and self.when_appears == score:
@@ -28,7 +27,15 @@ class PowerUpManager:
 
         if len(self.extra_life) == 0 and self.heart_appears == score:
             self.heart_appears += random.randint(300,500)
-            self.extra_life.append(Heart())
+
+            randomic_choice2 = random.randint(0,1)
+
+            if randomic_choice2 == 0:
+                self.extra_life.append(Heart())
+                self.item = 1
+            elif randomic_choice2 == 1:
+                self.extra_life.append(Coin(COIN))
+                self.item = 2
 
     def update(self, game):
         self.generate_power_up(game.score)
@@ -49,9 +56,12 @@ class PowerUpManager:
             heart.update(game.game_speed, self.extra_life)
 
             player = game.player
-            if player.dino_rect.colliderect(heart.rect):
+            if player.dino_rect.colliderect(heart.rect) and self.item == 1:
                 self.extra_life.remove(heart)
                 game.lifes +=1
+            elif player.dino_rect.colliderect(heart.rect) and self.item == 2:
+                self.extra_life.remove(heart)
+                game.score += 100
         
         if game.playing == False:
             self.when_appears = 0
